@@ -1,0 +1,12 @@
+{
+  "name": "exemplos-porque-transducers",
+  "version": "1.0.0",
+  "description": "Repositórios com exemplos de código para o artigo Transducers (Taller)",
+  "main": "index.js",
+  "author": "Arthur Almeida",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "ramda": "^0.27.0"
+  }
+}
