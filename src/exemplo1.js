@@ -29,3 +29,8 @@ const addOneAndDoubleAndIsBiggerThan = R.compose(
 );
 
 console.log(list.map(addOneAndDoubleAndIsBiggerThan).reduce(sum, 0));
+
+const result1 = isBiggerThanTen(double(addOne(1)));
+const result2 = isBiggerThanTen(double(addOne(5)));
+
+console.log({ result1, result2 });
