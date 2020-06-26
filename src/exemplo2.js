@@ -24,12 +24,13 @@ const list = [
 ];
 
 const mapReducer = (map) => (acc, value) => acc.concat(map(value));
+const filterReducer = (predicate) => (acc, value) =>
+  predicate(value) ? acc.concat(value) : acc;
 
 const doubleReducer = mapReducer(double);
 const addOneReducer = mapReducer(addOne);
 
-const isBiggerThanTenReducer = (acc, value) =>
-  isBiggerThanTen(value) ? acc.concat(value) : acc;
+const isBiggerThanTenReducer = filterReducer(isBiggerThanTen);
 
 console.log(`double using map: ${list.map(double)}`);
 console.log(`double using reduce: ${list.reduce(doubleReducer, [])}`);
