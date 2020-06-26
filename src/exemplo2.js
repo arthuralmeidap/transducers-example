@@ -1,4 +1,11 @@
-const { double, isBiggerThanTen, sum, addOne } = require("./operations");
+const {
+  double,
+  isBiggerThanTen,
+  addOne,
+  combinator,
+  mapReducer,
+  filterReducer,
+} = require("./operations");
 
 const list = [
   1,
@@ -22,13 +29,6 @@ const list = [
   19,
   20,
 ];
-
-const combinator = (acc, value) => acc.concat(value);
-
-const mapReducer = (map) => (combinator) => (acc, value) =>
-  combinator(acc, map(value));
-const filterReducer = (predicate) => (combinator) => (acc, value) =>
-  predicate(value) ? combinator(acc, value) : acc;
 
 const doubleReducer = mapReducer(double)(combinator);
 const addOneReducer = mapReducer(addOne)(combinator);
