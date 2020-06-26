@@ -21,3 +21,11 @@ const sumListComposta = list
   .reduce(sum, 0);
 
 console.log(sumListComposta);
+
+const addOneAndDoubleAndIsBiggerThan = R.compose(
+  isBiggerThanTen,
+  double,
+  addOne
+);
+
+console.log(list.map(addOneAndDoubleAndIsBiggerThan).reduce(sum, 0));
