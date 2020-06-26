@@ -1,4 +1,4 @@
-import { compose } from "ramda";
+const R = require("ramda");
 const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const double = (n) => n * 2;
@@ -12,3 +12,12 @@ const sumList = list
   .reduce(sum, 0);
 
 console.log(sumList);
+
+const addOneAndDouble = R.compose(double, addOne);
+
+const sumListComposta = list
+  .map(addOneAndDouble)
+  .filter(isBiggerThanTen)
+  .reduce(sum, 0);
+
+console.log(sumListComposta);
