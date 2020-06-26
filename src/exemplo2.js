@@ -23,8 +23,10 @@ const list = [
   20,
 ];
 
-const doubleReducer = (acc, value) => acc.concat(double(value));
-const addOneReducer = (acc, value) => acc.concat(addOne(value));
+const mapReducer = (map) => (acc, value) => acc.concat(map(value));
+
+const doubleReducer = mapReducer(double);
+const addOneReducer = mapReducer(addOne);
 
 const isBiggerThanTenReducer = (acc, value) =>
   isBiggerThanTen(value) ? acc.concat(value) : acc;
