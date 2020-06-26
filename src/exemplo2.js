@@ -23,14 +23,17 @@ const list = [
   20,
 ];
 
-const mapReducer = (map) => (acc, value) => acc.concat(map(value));
-const filterReducer = (predicate) => (acc, value) =>
-  predicate(value) ? acc.concat(value) : acc;
+const combinator = (acc, value) => acc.concat(value);
 
-const doubleReducer = mapReducer(double);
-const addOneReducer = mapReducer(addOne);
+const mapReducer = (map) => (combinator) => (acc, value) =>
+  combinator(acc, map(value));
+const filterReducer = (predicate) => (combinator) => (acc, value) =>
+  predicate(value) ? combinator(acc, value) : acc;
 
-const isBiggerThanTenReducer = filterReducer(isBiggerThanTen);
+const doubleReducer = mapReducer(double)(combinator);
+const addOneReducer = mapReducer(addOne)(combinator);
+
+const isBiggerThanTenReducer = filterReducer(isBiggerThanTen)(combinator);
 
 console.log(`double using map: ${list.map(double)}`);
 console.log(`double using reduce: ${list.reduce(doubleReducer, [])}`);
