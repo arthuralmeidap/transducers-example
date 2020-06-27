@@ -24,9 +24,15 @@ const addOneAndDoubleReducer = compose(
   isBiggerIntermediateReducer
 )(combinator);
 
+const sumReducer = compose(
+  addOneIntermediateReducer,
+  doubleIntermediateReducer,
+  isBiggerIntermediateReducer
+)(sum);
+
 const list = [1, 2, 3, 4, 5, 6];
 
 const total = list.reduce(addOneAndDoubleReducer, []).reduce(sum, 0);
 
-console.log(list.reduce(addOneAndDoubleReducer, []));
+console.log(list.reduce(sumReducer, 0));
 console.log(total);
