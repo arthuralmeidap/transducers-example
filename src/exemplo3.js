@@ -1,5 +1,3 @@
-const { compose } = require("ramda");
-
 const {
   double,
   isBiggerThanTen,
@@ -9,9 +7,11 @@ const {
   filterReducer,
 } = require("./operations");
 
-const doubleReducer = mapReducer(double);
-const addOneReducer = mapReducer(addOne);
+const doubleIntermediateReducer = mapReducer(double);
+const addOneIntermediateReducer = mapReducer(addOne);
+const isBiggerIntermediateReducer = filterReducer(isBiggerThanTen);
 
-const addOneAndDouble = compose(doubleReducer, addOneReducer);
-
-console.log(addOneAndDouble(1));
+// para termos uma função reducer para ser usada ainda precisamos aplicar o combinator
+const doubleReducer = doubleIntermediateReducer(combinator);
+const addOneReducer = addOneIntermediateReducer(combinator);
+const isBiggerReducer = isBiggerIntermediateReducer(combinator);
