@@ -3,6 +3,7 @@ const {
   isBiggerThanTen,
   addOne,
   combinator,
+  sum,
   mapReducer,
   filterReducer,
 } = require("./operations");
@@ -23,4 +24,9 @@ const addOneAndDoubleReducer = compose(
   isBiggerIntermediateReducer
 )(combinator);
 
-console.log([1, 2, 3, 4, 5, 6].reduce(addOneAndDoubleReducer, []));
+const list = [1, 2, 3, 4, 5, 6];
+
+const total = list.reduce(addOneAndDoubleReducer, []).reduce(sum, 0);
+
+console.log(list.reduce(addOneAndDoubleReducer, []));
+console.log(total);
