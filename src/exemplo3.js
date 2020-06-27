@@ -9,6 +9,8 @@ const {
 } = require("./operations");
 const { compose } = require("ramda");
 
+const strConcat = (a, b) => a + " - " + b;
+
 const doubleIntermediateReducer = mapReducer(double);
 const addOneIntermediateReducer = mapReducer(addOne);
 const isBiggerIntermediateReducer = filterReducer(isBiggerThanTen);
@@ -18,17 +20,15 @@ const doubleReducer = doubleIntermediateReducer(combinator);
 const addOneReducer = addOneIntermediateReducer(combinator);
 const isBiggerReducer = isBiggerIntermediateReducer(combinator);
 
-const addOneAndDoubleReducer = compose(
+const transducer = compose(
   addOneIntermediateReducer,
   doubleIntermediateReducer,
   isBiggerIntermediateReducer
-)(combinator);
+);
 
-const sumReducer = compose(
-  addOneIntermediateReducer,
-  doubleIntermediateReducer,
-  isBiggerIntermediateReducer
-)(sum);
+const addOneAndDoubleReducer = transducer(combinator);
+
+const sumReducer = transducer(sum);
 
 const list = [1, 2, 3, 4, 5, 6];
 
@@ -36,3 +36,4 @@ const total = list.reduce(addOneAndDoubleReducer, []).reduce(sum, 0);
 
 console.log(list.reduce(sumReducer, 0));
 console.log(total);
+console.log(list.reduce(transducer(strConcat), ""));
